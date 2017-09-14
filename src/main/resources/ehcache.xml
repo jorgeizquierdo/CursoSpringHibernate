@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd"
+         updateCheck="false"
+         monitoring="off"
+         dynamicConfig="true"
+         name="cacheManager">
+    
+    <diskStore path="java.io.tmpdir"/>    
+     
+    <defaultCache eternal="false"
+                  timeToLiveSeconds="3600"
+                  overflowToDisk="true"
+                  maxElementsOnDisk="1000"
+                  memoryStoreEvictionPolicy="LRU" />
+
+    <!-- CUSTOMER -->
+
+    <cache name="customer"
+           eternal="false"
+           timeToLiveSeconds="30"
+           diskPersistent="true"
+           overflowToDisk="true"
+           maxElementsInMemory="1000"
+           maxElementsOnDisk="5000"
+           memoryStoreEvictionPolicy="LRU" />
+
+    <!-- END CUSTOMER -->
+
+</ehcache>
