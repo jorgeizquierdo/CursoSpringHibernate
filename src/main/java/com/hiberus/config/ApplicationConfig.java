@@ -9,14 +9,6 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @Configuration
 @PropertySource("classpath:application.properties")
 @ComponentScan(basePackages = "com.hiberus.api.service")
-/*@ComponentScan(
-        basePackages = "com.hiberus.api.service",
-        excludeFilters = {
-                @ComponentScan.Filter(type = FilterType.ASPECTJ, pattern = "com.hiberus.api.service.impl.practice.BeanServiceTwo")})*/
-/*@ComponentScan(
-        basePackages = "com.hiberus.api.service",
-        excludeFilters = {
-                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = BeanServiceTwo.class)})*/
 @Import({DatabaseConfig.class, CacheConfig.class})
 public class ApplicationConfig {
 

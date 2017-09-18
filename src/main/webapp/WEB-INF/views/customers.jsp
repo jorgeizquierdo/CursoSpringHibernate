@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<h1>Customers</h1>
+<h1>${title}</h1>
 
 <c:forEach items="${customers}" var="customer">
     <div class="customerItem">

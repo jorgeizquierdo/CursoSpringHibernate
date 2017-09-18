@@ -1,4 +1,4 @@
-package com.hiberus.api.service.impl.practice;
+package com.hiberus.api.service.impl.practiceN;
 
 import com.hiberus.api.service.CounterService;
 import org.springframework.stereotype.Service;

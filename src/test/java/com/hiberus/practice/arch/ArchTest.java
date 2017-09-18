@@ -14,10 +14,10 @@ import java.util.List;
 
 /**
  * Created by Daniel on 16/06/2016.
- */
+ *//*
 @SuppressWarnings("SpringJavaAutowiringInspection")
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ApplicationConfig.class)
+@ContextConfiguration(classes = ApplicationConfig.class)*/
 public class ArchTest {
 
     @Autowired
@@ -25,13 +25,13 @@ public class ArchTest {
     @Autowired
     private BrandService brandService;
 
-    @Test
+    //@Test
     public void getDealershipNumberOfVehicles(){
 
         Assert.assertTrue(this.dealershipService.getDealershipNumberOfVehicles(1) > 0);
     }
 
-    @Test
+    //@Test
     public void getBrandsByCountry(){
 
         List<?> brands = this.brandService.getBrandsByCountry("España");

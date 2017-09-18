@@ -32,16 +32,6 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     }
 
     /**
-     * Servlet-URI matching for...
-     *
-     * @return
-     */
-    @Override
-    protected String[] getServletMappings() {
-        return new String[]{"/"};
-    }
-
-    /**
      * Root context Java configuration classes...
      *
      * @return
@@ -61,6 +51,16 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     protected Class<?>[] getServletConfigClasses() {
 
         return new Class<?>[]{DispatcherServletConfig.class};
+    }
+
+    /**
+     * Servlet-URI matching for...
+     *
+     * @return
+     */
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
     }
 
     /**

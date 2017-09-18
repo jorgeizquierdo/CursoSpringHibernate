@@ -24,10 +24,6 @@ import java.util.List;
  */
 @Configuration
 @ComponentScan(basePackages = {"com.hiberus.api.controller", "com.hiberus.api.aop"})
-/*@ComponentScan(
-        basePackages = {"com.hiberus.api.controller", "com.hiberus.api.aop", "com.hiberus.api.service"},
-        includeFilters = {
-                @ComponentScan.Filter(type= FilterType.ASSIGNABLE_TYPE, value=BeanServiceTwo.class)})*/
 @EnableAspectJAutoProxy
 @EnableWebMvc
 public class DispatcherServletConfig extends WebMvcConfigurerAdapter {
