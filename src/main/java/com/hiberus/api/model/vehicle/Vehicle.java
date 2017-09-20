@@ -1,5 +1,6 @@
 package com.hiberus.api.model.vehicle;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.hiberus.api.dao.AbstractDAO;
 import com.hiberus.api.model.dealership.Dealership;
 import com.hiberus.api.model.sale.Sale;
@@ -45,22 +46,26 @@ public class Vehicle {
         this.calculo = calculo;
     }
 
-    @ManyToOne
+    //@ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vehicle_type_id", referencedColumnName = "id")
     private VehicleType vehicleType;
 
-    @ManyToOne
+    //@ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "color_id", referencedColumnName = "id")
     private Color color;
 
-    @ManyToOne
+    //@ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="dealership_id", referencedColumnName = "id")
     private Dealership dealership;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "vehicle")
     private List<Sale> sales;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    //@OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     @Fetch(FetchMode.SUBSELECT)
     @JoinColumns({
             @JoinColumn(name = "vehicle_id")
@@ -68,19 +73,22 @@ public class Vehicle {
     @OrderBy("description DESC")
     private List<DescriptionTranslations> descriptionTranslations;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    //@OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     @Fetch(FetchMode.SUBSELECT)
     @JoinColumn(name = "vehicle_id")
     @MapKey
     private Map<Integer, DescriptionTranslations> descriptionTraductionsMap;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    //@ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     @Fetch(FetchMode.SUBSELECT)
     @CollectionTable(name = "description_translations", joinColumns = @JoinColumn(name = "vehicle_id"))
     @Column(name = "description")
     private Set<String> descriptionTraductionsElement;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    //@ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     @Fetch(FetchMode.SUBSELECT)
     @CollectionTable(name = "description_translations", joinColumns = @JoinColumn(name = "vehicle_id"))
     @MapKeyColumn(name = "id")
