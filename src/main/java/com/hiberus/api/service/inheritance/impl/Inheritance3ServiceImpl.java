@@ -50,10 +50,4 @@ public class Inheritance3ServiceImpl implements Inheritance3Service {
         return this.owner3DAO.findAll();
     }
 
-    @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void insertOwner(Owner3 owner) {
-        this.owner3DAO.save(owner);
-    }
-
 }

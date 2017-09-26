@@ -29,7 +29,7 @@ public class SaleTest extends AppContextConfigurationAware {
     @Autowired
     private VehicleService vehicleService;
 
-    //@Test
+    @Test
     public void persistSale(){
 
         // Detached object, just when transaction ends.
@@ -47,7 +47,7 @@ public class SaleTest extends AppContextConfigurationAware {
     /**
      * With @Cascade(CascadeType.SAVE_UPDATE) on Customer.sales
      */
-    //@Test
+    @Test
     public void persistSaleFromCustomer() {
 
         // Detached object, just when transaction ends.
@@ -67,7 +67,7 @@ public class SaleTest extends AppContextConfigurationAware {
     /**
      * With @Cascade(CascadeType.SAVE_UPDATE) on Customer.sales
      */
-    //@Test
+    @Test
     public void updateSaleFromCustomer(){
 
         // Detached object (as its children collections), just when transaction ends.
@@ -99,7 +99,7 @@ public class SaleTest extends AppContextConfigurationAware {
         this.saleService.updateDuplicateSalePurchaseDate(4, new Date());
     }
 
-    //@Test
+    @Test
     public void newSaleByVehicleIdCustomerIdWithHQL(){
 
         Sale sale = this.saleService.getNewSaleByVehicleIdCustomerIdWithHQL(1, 8);

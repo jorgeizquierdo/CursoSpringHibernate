@@ -30,7 +30,7 @@ public class VehicleServiceImpl implements VehicleService{
     //@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public Vehicle getById(int id) {
         Vehicle vehicle = this.vehicleDAO.findById(id);
-        //vehicle.setStock(80);
+        //vehicle.setStock(100);
         return vehicle;
     }
 

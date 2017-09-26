@@ -14,4 +14,6 @@ public interface Inheritance1Service {
 
     List<Employee1> getAllEmployee();
 
+    void insertEmployee(Employee1 employee1);
+
 }

@@ -20,6 +20,4 @@ public interface Inheritance3Service {
 
     List<Owner3> getAllOwner();
 
-    void insertOwner(Owner3 owner);
-
 }

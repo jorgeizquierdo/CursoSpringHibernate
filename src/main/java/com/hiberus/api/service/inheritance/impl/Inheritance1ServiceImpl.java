@@ -34,4 +34,10 @@ public class Inheritance1ServiceImpl implements Inheritance1Service {
         return this.employee1DAO.findAll();
     }
 
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public void insertEmployee(Employee1 employee1) {
+        this.employee1DAO.save(employee1);
+    }
+
 }

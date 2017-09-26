@@ -83,36 +83,31 @@ public class AttributeServiceImpl implements AttributeService {
     @Override
     public EavAttributeType getAttributeTypeByIdFetchProfileInitialize1(int id) {
         // Usando un metodo de AbstractDAO
-        return this.eavAttributeTypeDAO.getUniqueFetchEntity(1, "attribute_type_attribute");
+        return null;
     }
 
     @Override
     public EavAttributeType getAttributeTypeByIdFetchProfileInitialize2(int id) {
         // Habilitando el filtro desde la session
-        this.eavAttributeTypeDAO.getCurrentSession().enableFetchProfile("attribute_type_attribute");
-        return this.eavAttributeTypeDAO.findById(id);
+        return null;
     }
 
     @Override
     public EavAttributeType getAttributeTypeByIdCriteriaInitialize1(int id) {
         // Usando un metodo de AbstractDAO
-        return this.eavAttributeTypeDAO.getUniqueLazyEntity(1, new AbstractDAO.CollectionName[]{EavAttributeType.Collection.EAV_ATTRIBUTE_LIST});
+        return null;
     }
 
     @Override
     public EavAttributeType getAttributeTypeByIdCriteriaInitialize2(int id) {
         // Usando Criteria
-        return (EavAttributeType) this.eavAttributeTypeDAO.getCriteria()
-                .add(Restrictions.idEq(id))
-                .setFetchMode(EavAttributeType.Collection.EAV_ATTRIBUTE_LIST.getCollectionName(), FetchMode.JOIN)
-                .uniqueResult();
+        return null;
     }
 
     @Override
     public EavAttributeType getAttributeTypeByIdHibernateInitialize(int id) {
-        EavAttributeType eavAttributeType = this.eavAttributeTypeDAO.findById(id);
-        Hibernate.initialize(eavAttributeType.getEavAttributeList());
-        return eavAttributeType;
+        // Usando Hibernate.initialize
+        return null;
     }
 
     @Override

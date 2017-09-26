@@ -22,7 +22,7 @@ public class EavTest extends AppContextConfigurationAware {
     @Autowired
     private ProductService productService;
 
-    //@Test
+    @Test
     public void modelTest() {
         List<EavAttribute> eavAttributeList = this.attributeService.getAllAttributes();
         List<EavAttributeType> eavAttributeTypeList = this.attributeService.getAllAttributeTypes();
@@ -35,14 +35,14 @@ public class EavTest extends AppContextConfigurationAware {
                             && productList != null && attributeProductValueList != null);
     }
 
-    //@Test
+    @Test
     public void collectionTest1() {
         EavAttribute eavAttribute = this.attributeService.getAttributeById(1);
 
         Assert.assertTrue(eavAttribute != null && eavAttribute.getEavAttributeType() != null && eavAttribute.getEavAttributeGroup() != null);
     }
 
-    //@Test
+    @Test
     public void collectionTest2() {
         EavAttributeType eavAttributeType = this.attributeService.getAttributeTypeById(1);
 
@@ -76,7 +76,7 @@ public class EavTest extends AppContextConfigurationAware {
         Assert.assertTrue(eavAttributeType1.getEavAttributeList().size() > 0);
     }
 
-    //@Test
+    @Test
     public void mapTest() {
         Product product = this.productService.getProductById(1);
 
@@ -87,7 +87,7 @@ public class EavTest extends AppContextConfigurationAware {
         }
     }
 
-    //@Test
+    @Test
     public void mapTest2() {
         Product product1 = this.productService.getProductByIdCriteriaInitialize(3);
         Product product2 = this.productService.getProductByIdFetchProfileInitialize(3);
@@ -104,7 +104,7 @@ public class EavTest extends AppContextConfigurationAware {
         Assert.assertTrue(productList != null);
     }
 
-    //@Test
+    @Test
     public void numberOfProducts() {
         Integer count = this.productService.numberOfProducts();
 
@@ -176,8 +176,8 @@ public class EavTest extends AppContextConfigurationAware {
     //@Test
     public void inheritanceSingleTableTestInsert() {
         EavAttributeGroup eavAttributeGroup = new EavAttributeGroup();
-        eavAttributeGroup.setCode("codigo x");
-        eavAttributeGroup.setName("nombre x");
+        eavAttributeGroup.setCode("codigo y");
+        eavAttributeGroup.setName("nombre y");
         this.attributeService.insertAttributeGroup(eavAttributeGroup);
     }
 
@@ -191,15 +191,10 @@ public class EavTest extends AppContextConfigurationAware {
     //@Test
     public void inheritanceSingleTableTestInsert2() {
         EavAttributeGroupExtended eavAttributeGroup = new EavAttributeGroupExtended();
-        eavAttributeGroup.setCode("codigo x");
-        eavAttributeGroup.setName("nombre x");
-        eavAttributeGroup.setOtherColum("otra columna x");
+        eavAttributeGroup.setCode("codigo z");
+        eavAttributeGroup.setName("nombre z");
+        eavAttributeGroup.setOtherColum("otra columna z");
         this.attributeService.insertAttributeGroup(eavAttributeGroup);
-    }
-
-    @Test
-    public void dummyTest() {
-        Assert.assertTrue(true);
     }
 
 }

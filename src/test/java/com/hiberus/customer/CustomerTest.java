@@ -31,7 +31,7 @@ public class CustomerTest extends AppContextConfigurationAware {
     /**
      * Typical query.
      */
-    //@Test
+    @Test
     public void getCustomers() {
 
         List<Customer> customerList = this.customerService.getAll();
@@ -43,7 +43,7 @@ public class CustomerTest extends AppContextConfigurationAware {
      * Sales collection is not initialized on transaction scope (inside service),
      * so, an LazyInitializationException is throwed when try to get it.
      */
-    //@Test
+    @Test
     public void throwingLazyInitializationException() {
 
         try {

@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Table;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,14 +20,14 @@ public class Inheritance1Test extends AppContextConfigurationAware {
     @Autowired
     private Inheritance1Service inheritance1Service;
 
-    //@Test
+    @Test
     public void getAllPersonTest() {
         List<Person1> person1List = this.inheritance1Service.getAllPerson();
 
         Assert.assertTrue(person1List != null);
     }
 
-    //@Test
+    @Test
     public void getAllEmployeeTest() {
         List<Employee1> employee1List = this.inheritance1Service.getAllEmployee();
 
@@ -34,8 +35,8 @@ public class Inheritance1Test extends AppContextConfigurationAware {
     }
 
     @Test
-    public void dummyTest() {
-        Assert.assertTrue(true);
+    public void insertEmployeeTest() {
+        this.inheritance1Service.insertEmployee(new Employee1("firstname employee 30", "lastname employee 30", "department name 30", new Date()));
     }
 
 }

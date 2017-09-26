@@ -23,35 +23,25 @@ public class Inheritance3Test extends AppContextConfigurationAware {
     @Autowired
     private Inheritance3Service inheritance3Service;
 
-    //@Test
+    @Test
     public void getAllPersonTest() {
         List<Person3> person3List = this.inheritance3Service.getAllPerson();
 
         Assert.assertTrue(person3List != null);
     }
 
-    //@Test
+    @Test
     public void getAllEmployeeTest() {
         List<Employee3> employee3List = this.inheritance3Service.getAllEmployee();
 
         Assert.assertTrue(employee3List != null);
     }
 
-    //@Test
+    @Test
     public void getAllOwnerTest() {
         List<Owner3> owner3List = this.inheritance3Service.getAllOwner();
 
         Assert.assertTrue(owner3List != null);
-    }
-
-    //@Test
-    public void insertOwnerTest() {
-        this.inheritance3Service.insertOwner(new Owner3("firstname owner 2", "lastname owner 2", 888L, 999L));
-    }
-
-    @Test
-    public void dummyTest() {
-        Assert.assertTrue(true);
     }
 
 }
