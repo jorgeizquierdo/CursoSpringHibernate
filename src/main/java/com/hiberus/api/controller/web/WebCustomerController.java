@@ -42,7 +42,7 @@ public class WebCustomerController {
     @RequestMapping(value = "/exception", method = RequestMethod.GET)
     public String throwException() throws Exception {
 
-        throw new Exception("Throwing exception...");
+        throw new NullPointerException("Throwing exception...");
     }
 
 }
