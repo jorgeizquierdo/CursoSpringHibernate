@@ -19,6 +19,10 @@ import java.util.Map;
                 @FetchProfile.FetchOverride(entity = Product.class, association = "attributeValuesMap", mode = FetchMode.JOIN)
         })
 })
+@FilterDef(name = "maxStock", parameters = {
+        @ParamDef(name = "maxStock", type = "int")
+})
+@Filter(name = "maxStock", condition = "stock <= :maxStock")
 public class Product {
 
     @Id

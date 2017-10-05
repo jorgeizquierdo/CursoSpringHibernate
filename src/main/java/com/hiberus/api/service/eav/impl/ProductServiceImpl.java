@@ -22,7 +22,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -77,8 +76,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAllFilteredByMaxStock(int maxStock) {
-        // Definir filtro en la entidad producto que filtre por stock maximo y usarlo aqui
-        return null;
+        this.productDAO.getCurrentSession()
+                .enableFilter("maxStock")
+                .setParameter("maxStock", maxStock);
+        return this.productDAO.findAll();
     }
 
     @Override
@@ -106,32 +107,68 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> query1Criteria() {
         // Productos que tengan atributos de los grupos 1 y 2
-        return new ArrayList<>();
+        return this.productDAO.getCriteria()
+                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+                .createAlias("attributeProductValueList", "apv")
+                    .createAlias("apv.eavAttribute", "attr")
+                        .add(Restrictions.in("attr.eavAttributeGroup.id", new Integer[]{1, 2}))
+                .list();
     }
 
     @Override
     public List<Product> query2Criteria() {
         // Productos que no tengan atributos del tipo con codigo 'attribute_type_3'
-        return new ArrayList<>();
+        return this.productDAO.getCriteria()
+                .add(Subqueries.propertyNotIn("id", DetachedCriteria.forClass(AttributeProductValue.class)
+                    .setProjection(Projections.distinct(Projections.property("product.id")))
+                    .createAlias("eavAttribute", "attr")
+                        .createAlias("attr.eavAttributeType", "type")
+                            .add(Restrictions.like("type.code", "attribute_type_3"))))
+                .list();
     }
 
     @SuppressWarnings("JpaQlInspection")
     @Override
     public List<Product> query1HQL() {
         // Productos que tengan atributos de los grupos 1 y 2
-        return new ArrayList<>();
+        String hql =
+                "SELECT distinct p " +
+                        "FROM product p " +
+                        "INNER JOIN p.attributeProductValueList apv " +
+                        "INNER JOIN apv.eavAttribute attr " +
+                        "INNER JOIN attr.eavAttributeGroup grp " +
+                        "WHERE grp.id IN (:ids) ";
+        return  this.productDAO.getCurrentSession().createQuery(hql).setParameterList("ids", new Integer[]{1, 2}).list();
     }
 
     @SuppressWarnings("JpaQlInspection")
     @Override
     public List<Product> query2HQL() {
         // Productos que no tengan atributos del tipo 3
-        return new ArrayList<>();
+        String hql =
+                "SELECT p " +
+                        "FROM product p " +
+                        "WHERE p.id NOT IN (SELECT distinct apv.product.id " +
+                        "FROM attributeProductValue apv " +
+                        "INNER JOIN apv.eavAttribute attr " +
+                        "INNER JOIN attr.eavAttributeType type " +
+                        "WHERE type.code = :code)";
+        return  this.productDAO.getCurrentSession().createQuery(hql).setParameter("code", "attribute_type_3").list();
     }
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void insertAttributeProductValue(int attributeId, int productId, String value) {
-        // Insertar valor para un atributo, o actualizarlo si ya tiene un valor
+        EavAttribute eavAttribute = this.eavAttributeDAO.findById(attributeId);
+        Product product = this.productDAO.findById(productId);
+
+        if (eavAttribute != null && product != null) {
+            AttributeProductValue attributeProductValue = new AttributeProductValue();
+            attributeProductValue.setEavAttribute(eavAttribute);
+            attributeProductValue.setProduct(product);
+            attributeProductValue.setValue(value);
+
+            this.attributeProductValueDAO.saveOrUpdate(attributeProductValue);
+        }
     }
 
 }
